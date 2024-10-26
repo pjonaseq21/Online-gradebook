@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
+    <meta charset="UTF-8">
+    <title>{% block title %}Strona główna{% endblock %}</title>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-div">
+        <h1 class="title-of-page"><a href="/">Dzienniczek</a></h1>
+
+       <!-- tutaj dodaj jakies rzeczy po zalogowaniu-->
+        </div>
+    </nav>
+
+    <main class="main">
+      
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>Stopka wspólna dla wszystkich stron</p>
+    </footer>
+</body>
+</html>
