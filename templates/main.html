@@ -2,6 +2,8 @@
 <html lang="pl">
 <head>
     <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+
     <meta charset="UTF-8">
     <title>{% block title %}Strona główna{% endblock %}</title>
 </head>
@@ -11,13 +13,37 @@
         <h1 class="title-of-page"><a href="/">Dzienniczek</a></h1>
 
        <!-- tutaj dodaj jakies rzeczy po zalogowaniu-->
-        <div class="nav"><a class="login" href="/login">Zaloguj sie <img src="{{url_for('static', filename='images/user.png')}}" /></a></div>
+       {%if session['logged_in']%}
+       <div class="nav">Zalogowany <img src="{{url_for('static', filename='images/check.png')}}" /></div>
+
+       {% else %}
+       <div class="nav"><a class="login" href="/login">Zaloguj sie <img src="{{url_for('static', filename='images/user.png')}}" /></a></div>
+
+       {% endif %}
+
         </div>
     </nav>
 
     <main class="main">
+
         {%if session['logged_in']%}
-        <h2>Witaj użytkowniku</h2>
+        <div class="welcome"><p>Witaj nauczycielu {{ session['imie'] }} {{ session['nazwisko'] }}</p></div>
+
+        <div class="main-logged">
+            <div class="class_adding">
+            <ul>
+            {% for klasa in klasy %}
+                <li>{{ klasa.nazwa }}</li>
+            {% endfor %}
+        </ul>
+            <form action="{{ url_for('add_class') }}" method="POST">
+                <input type="text" name="class" class="add_classinput">
+                <button type="submit" class="button-37">Dodaj klase</a>
+
+            </form>
+        </div>
+
+        </div>
 
         {% else %}
             <h1 class="big-h1">Aby zobaczyc zawartosc zaloguj sie</h1>
@@ -25,8 +51,6 @@
         {% block content %}{% endblock %}
     </main>
 
-    <footer>
-        <p>Stopka wspólna dla wszystkich stron</p>
-    </footer>
+   
 </body>
 </html>

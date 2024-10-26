@@ -1,0 +1,51 @@
+.main form{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+.container{
+    width: 35%!important;
+
+}
+h2{
+    color: #2a2835;
+    font-weight: 700;
+    font-size: 3rem;
+    margin: 15px;
+
+}
+label, input,button  {
+    margin-left: 10px;
+    margin-bottom: 10px;
+
+}
+label{
+    cursor: pointer;
+    font-size: 1rem;
+    margin-bottom: 5px;
+    line-height: 1.5rem;
+}
+input{
+   border: 1px solid #949494;
+   color: #6e6e6e;
+   border-radius: .4375rem;
+   font-size: 1rem;
+   line-height: 1.5rem;
+   transition: background-color .3s ease-in-out;
+   outline: 0;
+   padding: 18px 16px;
+   height: 50px;
+}
+
+button{
+    background-color: #e33f4a;
+    padding: 18px 54px 18px 24px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.125rem;
+    line-height: 1.25rem;
+    max-width: 250px;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+}

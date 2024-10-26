@@ -21,7 +21,7 @@ a{
 }
 
 .nav img{
-    width: 5% !important;
+    width: 30px !important;
     margin-right: 5px;
 }
 .navbar-div{
@@ -48,7 +48,6 @@ a{
     width: 50%;
 }
 .main{
-    border:red solid 1px;
     margin: auto;
     width: 80%;
     height: 60vh;

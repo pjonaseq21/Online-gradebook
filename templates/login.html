@@ -1,8 +1,15 @@
 {% extends "base.html"%}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+{% endblock %}
+
 {% block title %}Logowanie{% endblock %}
 {% block content %}
+<div class="container">
 
-<h2>Logowanie</h2>
+<h2>Zaloguj się</h2>
+
 <form action="{{ url_for('login') }}" method="POST">
     <label for="login">Nazwa użytkownika:</label>
     <input type="text" name="login" id="username" required>
@@ -12,6 +19,7 @@
     
     <button type="submit">Zaloguj się</button>
 </form>
+</div>
 
 {% if error %}
     <p style="color: red;">{{ error }}</p>
