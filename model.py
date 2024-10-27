@@ -1,16 +1,21 @@
 from extensions import db
 
 
+
 class Uczen(db.Model):
-    __tablename__ = 'Uczniowie'
+    __tablename__ = 'uczniowie'
     id = db.Column(db.Integer, primary_key=True)
-    imie = db.Column(db.String(80), unique=False, nullable=False)
-    nazwisko = db.Column(db.String(80), unique=False, nullable=False)
-    klasa = db.Column(db.String(20), unique=False, nullable=False)
+    imie = db.Column(db.String(80), nullable=False)
+    nazwisko = db.Column(db.String(80), nullable=False)
+    login = db.Column(db.String(20), unique=True, nullable=False)
+    haslo = db.Column(db.String(20), nullable=False)
+
+    # Foreign key, aby powiązać ucznia z klasą
+    klasa_id = db.Column(db.Integer, db.ForeignKey('klasy.id'), nullable=False)
 
     def __repr__(self):
-        return f'<User {self.username}>'
-        
+        return f'<Uczen {self.imie} {self.nazwisko}>'
+
 nauczyciel_klasa = db.Table('nauczyciel_klasa',
     db.Column('nauczyciel_id', db.Integer, db.ForeignKey('nauczyciele.id'), primary_key=True),
     db.Column('klasa_id', db.Integer, db.ForeignKey('klasy.id'), primary_key=True)
@@ -33,7 +38,10 @@ class Nauczyciel(db.Model):
 class Klasa(db.Model):
     __tablename__ = 'klasy'
     id = db.Column(db.Integer, primary_key=True)
-    nazwa = db.Column(db.String(20), nullable=False)
+    nazwa = db.Column(db.String(20), nullable=False, unique=True)
+    
+    # Relacja z uczniem - jedna klasa może mieć wielu uczniów
+    uczniowie = db.relationship('Uczen', backref='klasa', lazy=True)
 
     def __repr__(self):
         return f'<Klasa {self.nazwa}>'

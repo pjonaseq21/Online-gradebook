@@ -1,0 +1,24 @@
+{% extends "base.html"%}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='class.css') }}">
+{% endblock %}
+
+
+
+{% block title %}Logowanie{% endblock %}
+{% block content %}
+<div class="container">
+<div class="class_name">{{klasa}}</div>
+{% for uczen in uczniowie %}
+<li class="student">{{ uczen.imie }} {{ uczen.nazwisko }} <div class="buttons"><a href="">Dodaj Ocene</a> <a href="">Wyślij wiadomość <img class="email" src="{{url_for('static', filename='images/email.png')}}" /></a></div></li>
+{% endfor %}
+<a class="button-37"href="/klasa/{{klasa}}/add_student">Dodaj Ucznia</a>
+
+</div>
+
+{% if error %}
+    <p style="color: red;">{{ error }}</p>
+{% endif %}
+
+
+{% endblock %}

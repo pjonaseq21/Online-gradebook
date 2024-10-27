@@ -33,7 +33,7 @@
             <div class="class_adding">
             <ul>
             {% for klasa in klasy %}
-                <li>{{ klasa.nazwa }}</li>
+               <a class="class" href="/klasa/{{ klasa.nazwa }}"><li>{{ klasa.nazwa }}</li></a> 
             {% endfor %}
         </ul>
             <form action="{{ url_for('add_class') }}" method="POST">
@@ -45,8 +45,15 @@
 
         </div>
 
+        <div class="announcement">
+            <h2>Ogłoszenia</h2>
+        </div>
         {% else %}
+            <div class="h1-container">
+                
             <h1 class="big-h1">Aby zobaczyc zawartosc zaloguj sie</h1>
+            </div>
+
         {% endif %}
         {% block content %}{% endblock %}
     </main>

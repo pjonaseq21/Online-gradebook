@@ -1,0 +1,3 @@
+dodac do uczniow mozliwosc dodawania ocen wysylania wiadomosci
+wyswietlanie dla ucznia 
+ogloszenia dla uczniow

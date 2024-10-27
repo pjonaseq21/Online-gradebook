@@ -1,30 +1,18 @@
-.welcome{
+.class_name{
     display: flex;
-    height: 10vh;
     justify-content: center;
-    align-items: center;
-    font-size: 1rem;
-    font-weight: 600;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    font-size: 1.5rem;
 }
-.main-logged{
+.add_student_div{
+    width: 80%;
+    margin: auto;
     display: flex;
-    height: 60vh;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
 }
-
-.klasy{
-    margin-left: 10px;
-    width: 20%;
-    display: flex;
-    align-items: start;
-    flex-direction: column;
-}
-
- .class{
+a{
     color: black;
- }   
+}
 .button-37 {
     background-color: #13aa52;
     border: 1px solid #13aa52;
@@ -57,27 +45,34 @@
     padding: 10px 30px;
     }
 }
-.add_classinput{
-    width: 30px;
-    margin-bottom: 7px;
-}
 
-.class_adding{
+.studentadd_form {
+    width: 30%;
     display: flex;
     flex-direction: column;
-    width: 25%;
-    align-items: end;
 }
-
-li{
-    font-size: 1.5rem;
+.studentadd_form input{
     margin-bottom: 5px;
-}
-.h1-container{
-    display: flex;
-    justify-content: center;
-}
-.main{
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
+}
+li{
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+.student{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 5px;
+}
+.email{
+    width: 15px;
+}
+.buttons{
+    display: flex;
+    justify-content: end; 
+    align-items: center;
+}
+li a{
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
 }
