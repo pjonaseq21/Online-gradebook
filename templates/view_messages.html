@@ -1,0 +1,26 @@
+{% extends "base.html"%}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='send_template.css') }}">
+{% endblock %}
+
+{% block title %}Logowanie{% endblock %}
+{% block content %}
+<div class="container">
+    {% for wiadomosc in wiadomosci %}
+    <li class="messages_box">
+        <strong>Od: {{ wiadomosc.nadawca.imie }} {{ wiadomosc.nadawca.nazwisko }}</strong>
+        <p>{{ wiadomosc.tresc }}</p>
+        <small>{{ wiadomosc.data_wyslania.strftime('%Y-%m-%d %H:%M') }}</small>
+    </li>
+{% else %}
+    <li>Brak wiadomości.</li>
+{% endfor %}
+    </div>
+    
+</div>
+
+{% if error %}
+    <p style="color: red;">{{ error }}</p>
+{% endif %}
+{% endblock %}

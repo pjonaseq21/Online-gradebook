@@ -76,3 +76,10 @@ li a{
     display: flex;
     align-items: center;
 }
+h1 a{
+    color: white !important;
+}
+.oceny{
+    margin-right: 5px;
+    border-right: 1px solid black;
+}

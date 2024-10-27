@@ -1,0 +1,18 @@
+{% extends "base.html"%}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='send_template.css') }}">
+{% endblock %}
+
+{% block title %}Logowanie{% endblock %}
+{% block content %}
+<div class="container">
+    
+    </div>
+    
+</div>
+
+{% if error %}
+    <p style="color: red;">{{ error }}</p>
+{% endif %}
+{% endblock %}

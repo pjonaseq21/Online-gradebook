@@ -14,7 +14,9 @@
 
        <!-- tutaj dodaj jakies rzeczy po zalogowaniu-->
        {%if session['logged_in']%}
-       <div class="nav">Zalogowany <img src="{{url_for('static', filename='images/check.png')}}" /></div>
+
+       <div class="nav">        {%if session['uczen'] is true%}  <a href="/show_messages"><img class="mail" src="{{url_for('static', filename='images/email.png')}}" alt=""></a>        {% endif %}
+        Zalogowany <img src="{{url_for('static', filename='images/check.png')}}" /></div>
 
        {% else %}
        <div class="nav"><a class="login" href="/login">Zaloguj sie <img src="{{url_for('static', filename='images/user.png')}}" /></a></div>
@@ -27,9 +29,14 @@
     <main class="main">
 
         {%if session['logged_in']%}
+        {%if session['uczen'] is false%}
         <div class="welcome"><p>Witaj nauczycielu {{ session['imie'] }} {{ session['nazwisko'] }}</p></div>
-
+        {% else %}
+        <div class="welcome"><p>Witaj Uczniu {{ session['imie'] }} {{ session['nazwisko'] }}</p></div>
+        {% endif %}
         <div class="main-logged">
+            {%if session['uczen'] is false%}
+
             <div class="class_adding">
             <ul>
             {% for klasa in klasy %}
@@ -42,12 +49,31 @@
 
             </form>
         </div>
-
-        </div>
+        {% endif %}
 
         <div class="announcement">
-            <h2>Ogłoszenia</h2>
+            <h1>Ogłoszenia</h1>
+            <div class="announcement-div">
+
+            {% for ogloszenie in ogloszenia %}
+
+                <p class="temat">{{ ogloszenie.temat }}</p>
+                <p class="tresc"> {{ ogloszenie.tresc }}</p>
+
+            {% endfor %}
+        </div> 
+
+            <a href="/send/announcement" type="submit" class="button-37">Dodaj Ogłoszenie</a>
+
+
+
+
         </div>
+
+        </div>
+
+
+        
         {% else %}
             <div class="h1-container">
                 

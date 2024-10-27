@@ -1,0 +1,22 @@
+{% extends "viewsomething.html"%}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='send_template.css') }}">
+{% endblock %}
+
+{% block title %}Logowanie{% endblock %}
+{% block content %}
+    <div class="container">
+        <form action="{{ url_for('add_grade', uczen_id=uczen_id, klasa_id=klasa_id) }}" method="POST">        
+        <label for="wartosc">Ocena:</label>
+        <input type="text" name="wartosc" id="password" required>
+        
+        <button type="submit">Dodaj</button>
+    </form>
+    </div>
+    
+
+{% if error %}
+    <p style="color: red;">{{ error }}</p>
+{% endif %}
+{% endblock %}

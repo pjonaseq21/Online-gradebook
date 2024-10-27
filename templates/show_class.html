@@ -10,7 +10,21 @@
 <div class="container">
 <div class="class_name">{{klasa}}</div>
 {% for uczen in uczniowie %}
-<li class="student">{{ uczen.imie }} {{ uczen.nazwisko }} <div class="buttons"><a href="">Dodaj Ocene</a> <a href="">Wyślij wiadomość <img class="email" src="{{url_for('static', filename='images/email.png')}}" /></a></div></li>
+    <li class="student">
+        {{ uczen.imie }} {{ uczen.nazwisko }}
+        <div class="buttons">
+            {% set oceny_ucznia = uczen.oceny %}
+            {% if oceny_ucznia %}
+                {% for ocena in oceny_ucznia %}
+                    <p class="oceny">{{ ocena.wartosc }}</p>
+                {% endfor %}
+            {% else %}
+                <p>Brak ocen</p>
+            {% endif %}
+            <a href="/dodaj_ocene/{{ uczen.id }}/{{ klasa }}">Dodaj Ocene</a>
+            <a href="/wyslij_wiadomosc/{{uczen.id}}">Wyślij wiadomość <img class="email" src="{{ url_for('static', filename='images/email.png') }}" /></a>
+        </div>
+    </li>
 {% endfor %}
 <a class="button-37"href="/klasa/{{klasa}}/add_student">Dodaj Ucznia</a>
 

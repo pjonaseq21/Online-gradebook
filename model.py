@@ -10,7 +10,6 @@ class Uczen(db.Model):
     login = db.Column(db.String(20), unique=True, nullable=False)
     haslo = db.Column(db.String(20), nullable=False)
 
-    # Foreign key, aby powiązać ucznia z klasą
     klasa_id = db.Column(db.Integer, db.ForeignKey('klasy.id'), nullable=False)
 
     def __repr__(self):
@@ -40,8 +39,46 @@ class Klasa(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nazwa = db.Column(db.String(20), nullable=False, unique=True)
     
-    # Relacja z uczniem - jedna klasa może mieć wielu uczniów
     uczniowie = db.relationship('Uczen', backref='klasa', lazy=True)
 
     def __repr__(self):
         return f'<Klasa {self.nazwa}>'
+
+class Ogloszenia(db.Model):
+    __tablename__ = 'ogloszenia'
+    id = db.Column(db.Integer, primary_key=True)
+    temat = db.Column(db.String(80), nullable=False)
+    tresc = db.Column(db.String(120), nullable=False)
+    def __repr__(self):
+            return f'<Klasa {self.temat}>'
+
+class Ocena(db.Model):
+    __tablename__ = 'oceny'
+    id = db.Column(db.Integer, primary_key=True)
+    wartosc = db.Column(db.Float, nullable=False) 
+
+    uczen_id = db.Column(db.Integer, db.ForeignKey('uczniowie.id'), nullable=False)
+    klasa_id = db.Column(db.Integer, db.ForeignKey('klasy.id'), nullable=False)
+
+    uczen = db.relationship('Uczen', backref=db.backref('oceny', lazy=True))
+    klasa = db.relationship('Klasa', backref=db.backref('oceny', lazy=True))
+
+    def __repr__(self):
+        return f'<Ocena {self.wartosc} dla ucznia {self.uczen_id} w klasie {self.klasa_id}>'
+
+from datetime import datetime
+
+class Wiadomosc(db.Model):
+    __tablename__ = 'wiadomosci'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    nadawca_id = db.Column(db.Integer, db.ForeignKey('nauczyciele.id'), nullable=False)
+    odbiorca_id = db.Column(db.Integer, db.ForeignKey('uczniowie.id'), nullable=False)
+    tresc = db.Column(db.Text, nullable=False)
+    data_wyslania = db.Column(db.DateTime, default=datetime.utcnow)
+
+    nadawca = db.relationship('Nauczyciel', backref='wiadomosci_nadawca')
+    odbiorca = db.relationship('Uczen', backref='wiadomosci_odbiorca')
+
+    def __repr__(self):
+        return f'<Wiadomosc od {self.nadawca_id} do {self.odbiorca_id}: {self.tresc}>'

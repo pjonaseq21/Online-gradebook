@@ -1,0 +1,24 @@
+{% extends "base.html"%}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='send_template.css') }}">
+{% endblock %}
+
+{% block title %}Logowanie{% endblock %}
+{% block content %}
+<div class="container">
+    <form class="formannouncement" action="{{ url_for('sendmessage',uczen_id=uczen_id) }}" method="POST">
+        
+        <label for="haslo">Treść:</label>
+        <textarea type="text" name="tresc" id="tresc" required ></textarea>
+        
+        <button type="submit">Dodaj</button>
+    </form>
+    </div>
+    
+</div>
+
+{% if error %}
+    <p style="color: red;">{{ error }}</p>
+{% endif %}
+{% endblock %}

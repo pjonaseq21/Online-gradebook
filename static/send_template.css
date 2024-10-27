@@ -1,0 +1,21 @@
+.container{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+}
+.formannouncement{
+    display: flex;
+    flex-direction: column;
+}
+
+.formannouncement input{
+    width: 100%;
+}
+#tresc{
+    display: flex; /* Użycie flexbox */
+    align-items: start;
+    text-align: start;
+    height: 200px;
+}
+.messages_box{
+    margin-bottom: 10px;
+}

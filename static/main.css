@@ -66,7 +66,8 @@
     display: flex;
     flex-direction: column;
     width: 25%;
-    align-items: end;
+    align-items: center;
+    justify-content: space-between;
 }
 
 li{
@@ -80,4 +81,41 @@ li{
 .main{
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
+}
+.announcement{
+    border-left: 1px solid black;
+    width: 30vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    overflow-y: auto; 
+}
+.announcement h1 .button-37{
+    width: 10%;
+    margin-top: 20px;
+}
+.announcement h1{
+    height: 10%;
+    font-weight: 800;
+    font-size: 1.5rem;
+}
+.announcement-div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+.announcement-div  p{
+    margin: 10px;
+}
+.temat{
+    font-weight: 700;
+}
+.tresc{
+    max-width: 150px; /* Ustal maksymalną szerokość */
+    overflow-wrap: break-word;
+}
+.mail{
+    width: 20px;
 }
