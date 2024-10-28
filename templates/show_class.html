@@ -29,7 +29,30 @@
 <a class="button-37"href="/klasa/{{klasa}}/add_student">Dodaj Ucznia</a>
 
 </div>
+<div class="container_second">
+<div class="grades">
+    <h1>Wykres ocen dla klasy</h1>
+    <img src="{{ url_for('wykres_ocen', klasa_id=klasa) }}" alt="Wykres ocen" />
+</div>
+<div class="plan_lekcji">
+<h1>plan lekcji</h1>
+<table border="1">
+    <tr>
+        <th>Dzień Tygodnia</th>
+        <th>Godzina</th>
+        <th>Przedmiot</th>
+    </tr>
+    {% for lekcja in plan %}
+    <tr>
+        <td>{{ lekcja.dzien_tygodnia }}</td>
+        <td>{{ lekcja.godzina }}</td>
+        <td>{{ lekcja.przedmiot.nazwa }}</td>
+    </tr>
+    {% endfor %}
+</table>
+</div>
 
+</div>
 {% if error %}
     <p style="color: red;">{{ error }}</p>
 {% endif %}

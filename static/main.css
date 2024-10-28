@@ -119,3 +119,38 @@ li{
 .mail{
     width: 20px;
 }
+.grades_div{
+    border-left: 1px solid black;
+    width: 30vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto; 
+}
+.grades_div h1{
+height: 10%;
+font-weight: 800;
+font-size: 1.5rem;
+}
+.plan_lekcji{
+    border-left: 1px solid black;
+    width: 500px;
+    text-align: center;
+    max-height: 700px;
+    padding: 10px;
+    
+    align-items: center;
+    overflow-y: auto; 
+
+}
+.plan_lekcji table{
+    overflow-y: auto; 
+    overflow-x: auto;
+    height: 300px;
+    margin: auto;
+    border-collapse: collapse; 
+}
+.plan_lekcji h1{
+    font-weight: 800;
+
+}

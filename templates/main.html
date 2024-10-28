@@ -43,12 +43,15 @@
                <a class="class" href="/klasa/{{ klasa.nazwa }}"><li>{{ klasa.nazwa }}</li></a> 
             {% endfor %}
         </ul>
+
             <form action="{{ url_for('add_class') }}" method="POST">
-                <input type="text" name="class" class="add_classinput">
+                <input type="text" name="class" class="add_classinput" required>
                 <button type="submit" class="button-37">Dodaj klase</a>
 
             </form>
+
         </div>
+
         {% endif %}
 
         <div class="announcement">
@@ -62,13 +65,42 @@
 
             {% endfor %}
         </div> 
+        {%if session['uczen'] is false%}
 
             <a href="/send/announcement" type="submit" class="button-37">Dodaj Ogłoszenie</a>
 
+            {% endif %}
 
 
 
         </div>
+        {%if session['uczen'] is true%}
+        <div class="grades_div">
+        <h1>Oceny</h1>
+        {% for ocena in oceny %}
+                    <p class="oceny">{{ ocena.wartosc }}</p>
+                {% endfor %}
+                
+        </div>
+        <div class="plan_lekcji">
+            <h1>plan lekcji</h1>
+            <table border="1">
+                <tr>
+                    <th>Dzień Tygodnia</th>
+                    <th>Godzina</th>
+                    <th>Przedmiot</th>
+                </tr>
+                {% for lekcja in plan %}
+                <tr>
+                    <td>{{ lekcja.dzien_tygodnia }}</td>
+                    <td>{{ lekcja.godzina }}</td>
+                    <td>{{ lekcja.przedmiot.nazwa }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            </div>
+
+        {% endif %}
 
         </div>
 

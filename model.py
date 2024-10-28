@@ -38,7 +38,7 @@ class Klasa(db.Model):
     __tablename__ = 'klasy'
     id = db.Column(db.Integer, primary_key=True)
     nazwa = db.Column(db.String(20), nullable=False, unique=True)
-    
+    przedmioty = db.relationship('PlanLekcji', backref='klasa', lazy=True)
     uczniowie = db.relationship('Uczen', backref='klasa', lazy=True)
 
     def __repr__(self):
@@ -82,3 +82,24 @@ class Wiadomosc(db.Model):
 
     def __repr__(self):
         return f'<Wiadomosc od {self.nadawca_id} do {self.odbiorca_id}: {self.tresc}>'
+
+class Przedmiot(db.Model):
+    __tablename__ = 'przedmioty'
+    id = db.Column(db.Integer, primary_key=True)
+    nazwa = db.Column(db.String(50), nullable=False)
+
+    plan_lekcji = db.relationship('PlanLekcji', backref='przedmiot', lazy=True)
+
+    def __repr__(self):
+        return f'<Przedmiot {self.nazwa}>'
+
+class PlanLekcji(db.Model):
+    __tablename__ = 'plan_lekcji'
+    id = db.Column(db.Integer, primary_key=True)
+    klasa_id = db.Column(db.Integer, db.ForeignKey('klasy.id'), nullable=False)
+    przedmiot_id = db.Column(db.Integer, db.ForeignKey('przedmioty.id'), nullable=False)
+    dzien_tygodnia = db.Column(db.String(20), nullable=False)
+    godzina = db.Column(db.String(20), nullable=False)
+
+    def __repr__(self):
+        return f'<PlanLekcji Klasa: {self.klasa_id}, Przedmiot: {self.przedmiot_id}, Dzień: {self.dzien_tygodnia}, Godzina: {self.godzina}>'
