@@ -45,8 +45,18 @@
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
+  
 }
-
+.plan_lekcji h1{
+        font-weight: 800;
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+}
+.container_ann{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 .button-37:hover {
     box-shadow: rgba(0, 0, 0, .15) 0 3px 9px 0;
     transform: translateY(-2px);
@@ -57,6 +67,7 @@
     padding: 10px 30px;
     }
 }
+
 .add_classinput{
     width: 30px;
     margin-bottom: 7px;
@@ -89,13 +100,22 @@ li{
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    overflow-y: auto; 
 }
 .announcement h1 .button-37{
     width: 10%;
     margin-top: 20px;
 }
+.announcement-btn{
+    margin-bottom: 10px;
+
+}
 .announcement h1{
+    height: 10%;
+    font-weight: 800;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+.class_adding h1{
     height: 10%;
     font-weight: 800;
     font-size: 1.5rem;
@@ -104,7 +124,15 @@ li{
     display: flex;
     flex-direction: column;
     width: 100%;
-    align-items: center;
+}
+.container-one{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 40vh;
+}
+.wyloguj{
+    color: white;
 }
 .announcement-div  p{
     margin: 10px;
@@ -137,7 +165,6 @@ font-size: 1.5rem;
     width: 500px;
     text-align: center;
     max-height: 700px;
-    padding: 10px;
     
     align-items: center;
     overflow-y: auto; 

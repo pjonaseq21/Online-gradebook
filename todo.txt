@@ -1,2 +1,1 @@
-statystyki dla nauczyciela o klasie (srednia klasy)
-plan lekcji dla nauczyciela i ucznia
+wyloguj przycisk

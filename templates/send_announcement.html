@@ -2,6 +2,7 @@
 
 {% block head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='send_template.css') }}">
+<title>Wyślij wiadomość</title>
 {% endblock %}
 
 {% block title %}Logowanie{% endblock %}
@@ -14,7 +15,7 @@
         <label for="haslo">Treść:</label>
         <textarea type="text" name="tresc" id="tresc" required ></textarea>
         
-        <button type="submit">Dodaj</button>
+        <button type="submit">Wyślij</button>
     </form>
     </div>
     

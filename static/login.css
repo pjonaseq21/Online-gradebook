@@ -10,15 +10,18 @@
 
 }
 .container{
+    display: flex;
+    flex-direction: column;
     width: 35%!important;
-    margin-top: 10px;
+}
+.container h2{
+    margin: 15px;
+    margin-left: 0px;
 }
 h2{
     color: #2a2835;
     font-weight: 700;
     font-size: 3rem;
-    margin: 15px;
-    margin-top: 0px;
 
 }
 label, input,button  {

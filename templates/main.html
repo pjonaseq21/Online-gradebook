@@ -10,13 +10,13 @@
 <body>
     <nav class="navbar">
         <div class="navbar-div">
+        <img class="school-icon" src="{{url_for('static', filename='images/school.png')}}">
         <h1 class="title-of-page"><a href="/">Dzienniczek</a></h1>
 
-       <!-- tutaj dodaj jakies rzeczy po zalogowaniu-->
        {%if session['logged_in']%}
 
        <div class="nav">        {%if session['uczen'] is true%}  <a href="/show_messages"><img class="mail" src="{{url_for('static', filename='images/email.png')}}" alt=""></a>        {% endif %}
-        Zalogowany <img src="{{url_for('static', filename='images/check.png')}}" /></div>
+        <a class="wyloguj" href="/wyloguj">Wyloguj</a> <img src="{{url_for('static', filename='images/check.png')}}" /></div>
 
        {% else %}
        <div class="nav"><a class="login" href="/login">Zaloguj sie <img src="{{url_for('static', filename='images/user.png')}}" /></a></div>
@@ -38,23 +38,28 @@
             {%if session['uczen'] is false%}
 
             <div class="class_adding">
+                <div class="container-one">
+                <h1>Klasy</h1>
+
             <ul>
             {% for klasa in klasy %}
                <a class="class" href="/klasa/{{ klasa.nazwa }}"><li>{{ klasa.nazwa }}</li></a> 
             {% endfor %}
         </ul>
-
+         </div>
+         <div>
             <form action="{{ url_for('add_class') }}" method="POST">
                 <input type="text" name="class" class="add_classinput" required>
                 <button type="submit" class="button-37">Dodaj klase</a>
 
             </form>
-
+        </div>
         </div>
 
         {% endif %}
 
         <div class="announcement">
+            <div class="container_ann">
             <h1>Ogłoszenia</h1>
             <div class="announcement-div">
 
@@ -66,15 +71,18 @@
             {% endfor %}
         </div> 
         {%if session['uczen'] is false%}
-
+     </div>
+     <div class="announcement-btn">
             <a href="/send/announcement" type="submit" class="button-37">Dodaj Ogłoszenie</a>
-
+        </div>
             {% endif %}
 
 
 
         </div>
         {%if session['uczen'] is true%}
+    </div>
+
         <div class="grades_div">
         <h1>Oceny</h1>
         {% for ocena in oceny %}
@@ -83,7 +91,7 @@
                 
         </div>
         <div class="plan_lekcji">
-            <h1>plan lekcji</h1>
+            <h1>Plan lekcji</h1>
             <table border="1">
                 <tr>
                     <th>Dzień Tygodnia</th>

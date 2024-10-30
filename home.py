@@ -16,6 +16,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 
 import random
+#logika odpowiedzialna za generowanie planu lekcji
 
 def generuj_plan_lekcji():
     dni_tygodnia = ['Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek']
@@ -32,7 +33,7 @@ def generuj_plan_lekcji():
                 db.session.add(new_plan)
 
     db.session.commit()
-
+#logika odpowiedzialna za generowanie planu lekcji
 @app.route('/generuj_plan')
 def generuj_plan():
     generuj_plan_lekcji()
@@ -45,6 +46,7 @@ with app.app_context():
         new_przedmiot = Przedmiot(nazwa=przedmiot)
         db.session.add(new_przedmiot)
     db.session.commit()   
+#funkcja dodawania oceny do bazy danych
 @app.route('/dodaj_ocene/<string:uczen_id>/<string:klasa_id>', methods=['POST'])
 def add_grade(uczen_id,klasa_id):
     wartosc = request.form['wartosc']
@@ -53,7 +55,7 @@ def add_grade(uczen_id,klasa_id):
     db.session.commit()
 
     return redirect(url_for('view_class',klasa_id=klasa_id))
-
+#dodaj ocene widok
 @app.route('/dodaj_ocene/<string:uczen_id>/<string:klasa_id>')
 def add_grade_landingpage(uczen_id,klasa_id):
     uczen = Uczen.query.get(uczen_id)
@@ -62,11 +64,13 @@ def add_grade_landingpage(uczen_id,klasa_id):
         print(ocena.wartosc)
     return render_template('add_grade.html',uczen_id=uczen_id,klasa_id=klasa_id,oceny=oceny_ucznia)
     
+#widok do wyświetlania wiadomości   
 @app.route("/wyslij_wiadomosc/<int:uczen_id>")
 def send_message(uczen_id):
 
 
     return render_template("send_message.html",uczen_id=uczen_id)
+#funckaj do dynamicznego tworzenia wykresu 
 @app.route('/wykres_ocen/<string:klasa_id>')
 def wykres_ocen(klasa_id):
     print(klasa_id)
@@ -87,6 +91,7 @@ def wykres_ocen(klasa_id):
         plt.savefig(output, format='png')
         output.seek(0)
         return Response(output.getvalue(), mimetype='image/png')
+#wyswietlanie klasy
 @app.route('/klasa/<string:klasa_id>')
 def view_class(klasa_id):
     klasa_solid = Klasa.query.filter_by(nazwa=klasa_id).first()
@@ -98,13 +103,14 @@ def view_class(klasa_id):
 
     return render_template('show_class.html',klasa=klasa_id, plan =plan)
 
+#widok do dodaj ucznia do klasy
 @app.route('/klasa/<string:klasa_id>/add_student')
 def add_student_form(klasa_id):
     print(klasa_id)
     return render_template('addstudent_view.html',klasa=klasa_id)
 
 
-
+#dodaj ucznia do klasy
 @app.route('/add_uczen/<string:klasa_id>', methods=['POST'])
 def add_uczen(klasa_id):
     if request.method == 'POST':
@@ -126,11 +132,13 @@ def add_uczen(klasa_id):
 
     return render_template('add_student.html')
 
+#widok do dodawania ogłoszenia
 @app.route("/send/announcement")
 def send_announcement():
 
     return render_template("send_announcement.html")
 
+#dodaj ogloszenie
 @app.route("/addannouncement", methods=['POST'])
 def addannouncement():
     if request.method == "POST":
@@ -140,6 +148,8 @@ def addannouncement():
         db.session.add(new_ogloszenie)
         db.session.commit()
         return redirect(url_for('home'))
+
+#wyślij wiadomosc do ucznia jako nauczyciel
 @app.route("/sendmessage/<int:uczen_id>", methods=['POST'])
 def sendmessage(uczen_id):
     if request.method == "POST":
@@ -151,6 +161,7 @@ def sendmessage(uczen_id):
         db.session.commit()
         return redirect(url_for('home'))
 
+#wyświetl wiadomości
 @app.route('/show_messages')
 def show_messages():
     if 'logged_in' not in session:
@@ -162,6 +173,8 @@ def show_messages():
     
     return render_template('view_messages.html', wiadomosci=wiadomosci)
     
+
+#główna funkcja wyswietlania base path    
 @app.route("/")
 def home():
      #tworzenie nowego usera
@@ -171,9 +184,10 @@ def home():
 
     if 'logged_in' in session:
         print("Witaj w domu!")
-        nauczyciel = Nauczyciel.query.filter_by(id=session["id"]).first()
-        uczen = Uczen.query.filter_by(id=session["id"]).first()
+        nauczyciel = Nauczyciel.query.filter_by(imie=session["imie"]).first()
+        uczen = Uczen.query.filter_by(imie=session["imie"]).first()
         if nauczyciel:
+            print("teststt")
             klasy_nauczyciela = nauczyciel.klasy
             print(klasy_nauczyciela)
             ogloszenia = Ogloszenia.query.all()
@@ -184,15 +198,17 @@ def home():
                 return render_template("main.html",klasy=klasy_nauczyciela)
         if uczen:
             oceny_ucznia = uczen.oceny
+            print(oceny_ucznia)
             plan = PlanLekcji.query.filter_by(klasa_id=uczen.klasa_id)
             print(plan)
             return render_template("main.html",ogloszenia = Ogloszenia.query.all(), oceny=oceny_ucznia,plan=plan)
 
     else:
+        print("test")
         return render_template("main.html")
 
    
-
+#login 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     if request.method == "POST":
@@ -221,7 +237,13 @@ def login():
             return render_template('login.html', error="Nieprawidłowe dane logowania")
         
     return render_template("login.html")
-    
+#wyloguj
+@app.route("/wyloguj")
+def wyloguj():
+    session.clear()
+    return redirect(url_for("home"))
+
+#dodaj klase
 @app.route("/add_class", methods=[ 'POST'])
 def add_class():
     if request.method == "POST":
